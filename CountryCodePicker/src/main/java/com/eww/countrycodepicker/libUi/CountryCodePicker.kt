@@ -97,8 +97,14 @@ class CountryCodePicker {
 
         Box(
             modifier = modifier
-                .clickable (enabled = clickable, onClick = { isOpenDialog = true })
-                .border(border = BorderStroke(2.dp, color = colorResource(id = R.color.heliotrope_gray)), shape = RoundedCornerShape(8.dp)),
+                .background(colorResource(id = R.color.heliotrope_gray), shape = RoundedCornerShape(10.dp))
+                .clickable(enabled = clickable, onClick = { isOpenDialog = true })
+                /*.border(
+                    border = BorderStroke(
+                        2.dp,
+                        color = colorResource(id = R.color.heliotrope_gray)
+                    ), shape = RoundedCornerShape(8.dp)
+                )*/,
             contentAlignment = Alignment.Center
         ) {
             Column(modifier = Modifier.padding(horizontal = 10.dp)) {
