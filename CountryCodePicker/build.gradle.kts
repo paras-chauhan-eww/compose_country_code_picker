@@ -1,12 +1,17 @@
+import org.jetbrains.kotlin.backend.common.serialization.mangle.publishedApiAnnotation
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
     namespace = "com.eww.countrycodepicker"
     compileSdk = 34
-
+    publishing {
+        singleVariant("release")
+    }
     defaultConfig {
         minSdk = 24
 
@@ -47,4 +52,17 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+}
+
+afterEvaluate {
+    with(publishing) {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "com.eww"
+                artifactId = "compose_country_code_picker"
+                version = "1.0.0"
+                from(components["release"])
+            }
+        }
+    }
 }
