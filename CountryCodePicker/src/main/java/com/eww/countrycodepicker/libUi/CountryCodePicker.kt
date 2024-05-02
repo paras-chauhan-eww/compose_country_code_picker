@@ -1,5 +1,6 @@
 package com.eww.countrycodepicker.libUi
 
+import android.transition.ChangeClipBounds
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -83,6 +84,7 @@ class CountryCodePicker {
         padding: Dp = 15.dp,
         isOnlyFlagShow: Boolean = false,
         isShowIcon: Boolean = true,
+        clickable: Boolean = true,
         defaultSelectedCountry: CountryCode = getLibCountries().first(),
         pickedCountry: (CountryCode) -> Unit,
         dialogSearch: Boolean = true,
@@ -95,8 +97,9 @@ class CountryCodePicker {
 
         Box(
             modifier = modifier
-                .clickable { isOpenDialog = true }
-                .border(border = BorderStroke(2.dp, color = colorResource(id = R.color.heliotrope_gray)), shape = RoundedCornerShape(8.dp))
+                .clickable (enabled = clickable, onClick = { isOpenDialog = true })
+                .border(border = BorderStroke(2.dp, color = colorResource(id = R.color.heliotrope_gray)), shape = RoundedCornerShape(8.dp)),
+            contentAlignment = Alignment.Center
         ) {
             Column(modifier = Modifier.padding(horizontal = 10.dp)) {
                 Row(
@@ -121,7 +124,7 @@ class CountryCodePicker {
                             Modifier.padding(start = 8.dp)
                         )
                     }
-                    if (isShowIcon) {
+                    if (isShowIcon && clickable) {
                         Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
                     }
                 }
