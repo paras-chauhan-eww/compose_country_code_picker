@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.backend.common.serialization.mangle.publishedApiAnnotation
 
 plugins {
     id("com.android.library")
@@ -29,11 +28,27 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.7"
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+}
+
+publishing{
+    publications{
+        register<MavenPublication>("release"){
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
     }
 }
 
@@ -52,17 +67,4 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-}
-
-afterEvaluate {
-    with(publishing) {
-        publications {
-            create<MavenPublication>("release") {
-                groupId = "com.eww"
-                artifactId = "compose_country_code_picker"
-                version = "1.0.0"
-                from(components["release"])
-            }
-        }
-    }
 }
