@@ -1,10 +1,7 @@
 package com.eww.countrycodepicker.libUi
 
-import android.transition.ChangeClipBounds
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,6 +39,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -87,6 +86,8 @@ class CountryCodePicker {
         clickable: Boolean = true,
         defaultSelectedCountry: CountryCode = getLibCountries().first(),
         pickedCountry: (CountryCode) -> Unit,
+        pickerTextStyle: TextStyle = TextStyle(),
+        pickerArrowId: Int = 0,
         dialogSearch: Boolean = true,
         dialogRounded: Int = 12
     ) {
@@ -97,17 +98,27 @@ class CountryCodePicker {
 
         Box(
             modifier = modifier
-                .background(colorResource(id = R.color.heliotrope_gray), shape = RoundedCornerShape(10.dp))
+                .background(
+                    colorResource(id = R.color.heliotrope_gray),
+                    shape = RoundedCornerShape(10.dp)
+                )
                 .clickable(enabled = clickable, onClick = { isOpenDialog = true })
-                /*.border(
-                    border = BorderStroke(
-                        2.dp,
-                        color = colorResource(id = R.color.heliotrope_gray)
-                    ), shape = RoundedCornerShape(8.dp)
-                )*/,
+            /*.border(
+                border = BorderStroke(
+                    2.dp,
+                    color = colorResource(id = R.color.heliotrope_gray)
+                ), shape = RoundedCornerShape(8.dp)
+            )*/,
             contentAlignment = Alignment.Center
         ) {
-            Column(modifier = Modifier.padding(horizontal = 10.dp)) {
+            Column(
+                modifier = Modifier.padding(
+                    start = 10.dp,
+                    top = 10.dp,
+                    bottom = 10.dp,
+                    end = if (clickable) 0.dp else 10.dp
+                )
+            ) {
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
@@ -127,11 +138,22 @@ class CountryCodePicker {
                     if (!isOnlyFlagShow) {
                         Text(
                             "${isPickCountry.countryPhoneCode}",
-                            Modifier.padding(start = 8.dp)
+                            Modifier.padding(start = 8.dp),
+                            style = pickerTextStyle,
                         )
                     }
                     if (isShowIcon && clickable) {
-                        Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
+                        if (pickerArrowId == 0) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowDropDown,
+                                contentDescription = null
+                            )
+                        } else {
+                            Image(
+                                painter = painterResource(id = pickerArrowId),
+                                contentDescription = null
+                            )
+                        }
                     }
                 }
             }
@@ -171,6 +193,10 @@ class CountryCodePicker {
                                                 isOpenDialog = false
                                             }) {
                                         Image(
+                                            modifier = Modifier
+                                                .size(20.dp, 20.dp)
+                                                .clip(CircleShape),
+                                            contentScale = ContentScale.Crop,
                                             painter = painterResource(
                                                 id = getFlagMasterResID(
                                                     countryItem.countryCode

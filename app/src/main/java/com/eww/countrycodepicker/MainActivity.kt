@@ -19,12 +19,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CountryCodePickerTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Greeting()
                 }
             }
         }
@@ -32,14 +31,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    CountryCodePicker().CountryCodeDialog(clickable = false,pickedCountry = {})
+fun Greeting() {
+    CountryCodePicker().CountryCodeDialog(clickable = true,pickedCountry = {})
 }
 
 @Preview(showBackground = true, device = Devices.PIXEL_4, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     CountryCodePickerTheme {
-        Greeting("Android")
+        Greeting()
     }
 }
