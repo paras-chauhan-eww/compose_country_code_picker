@@ -113,10 +113,10 @@ class CountryCodePicker {
         ) {
             Column(
                 modifier = Modifier.padding(
-                    start = 10.dp,
+                    start = 15.dp,
                     top = 10.dp,
                     bottom = 10.dp,
-                    end = if (clickable) 0.dp else 10.dp
+                    end = if (clickable) 5.dp else 15.dp
                 )
             ) {
                 Row(
