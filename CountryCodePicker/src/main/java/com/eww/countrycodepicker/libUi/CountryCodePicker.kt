@@ -89,6 +89,7 @@ class CountryCodePicker {
         pickerTextStyle: TextStyle = TextStyle(),
         pickerArrowId: Int = 0,
         dialogSearch: Boolean = true,
+        demo:Int = 0,
         dialogRounded: Int = 12
     ) {
         val countryList: List<CountryCode> = getLibCountries()
