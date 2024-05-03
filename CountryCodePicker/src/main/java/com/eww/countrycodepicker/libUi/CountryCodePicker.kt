@@ -184,6 +184,7 @@ class CountryCodePicker {
                                 ) { countryItem ->
                                     Row(
                                         Modifier
+                                            .fillMaxWidth()
                                             .padding(
                                                 horizontal = 18.dp,
                                                 vertical = 18.dp
