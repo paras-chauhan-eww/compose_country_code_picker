@@ -2,10 +2,13 @@
 
 #### Add this in your root `build.gradle` file (**not** your module `build.gradle` file):
 
-```groovy
-allprojects {
+```kts
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        maven { url "https://jitpack.io" }
+        ...
+        maven { setUrl("https://jitpack.io") }
     }
 }
 ```
@@ -14,8 +17,9 @@ allprojects {
 
 Add the following to your `build.gradle` dependencies:
 
-```groovy
+```kts
 dependencies {
+    ...
     implementation ("com.github.paras-chauhan-eww:compose_country_code_picker:<version>")
 }
 ```
