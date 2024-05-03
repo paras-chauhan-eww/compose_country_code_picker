@@ -150,6 +150,7 @@ class CountryCodePicker {
                             )
                         } else {
                             Image(
+                                modifier = Modifier.padding(horizontal = 10.dp),
                                 painter = painterResource(id = pickerArrowId),
                                 contentDescription = null
                             )
