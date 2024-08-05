@@ -1,5 +1,6 @@
 package com.eww.countrycodepicker.libUi
 
+import android.text.style.BackgroundColorSpan
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -87,6 +88,7 @@ class CountryCodePicker {
         defaultSelectedCountry: CountryCode = getLibCountries().first(),
         pickedCountry: (CountryCode) -> Unit,
         pickerTextStyle: TextStyle = TextStyle(),
+        containerBackgroundColor : Int = R.color.heliotrope_gray,
         pickerArrowId: Int = 0,
         dialogSearch: Boolean = true,
         dialogRounded: Int = 12
@@ -99,7 +101,7 @@ class CountryCodePicker {
         Box(
             modifier = modifier
                 .background(
-                    colorResource(id = R.color.heliotrope_gray),
+                    colorResource(id = containerBackgroundColor),
                     shape = RoundedCornerShape(10.dp)
                 )
                 .clickable(enabled = clickable, onClick = { isOpenDialog = true })
